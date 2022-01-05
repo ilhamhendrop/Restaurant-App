@@ -60,7 +60,8 @@ flutter:
 
 
   assets:
-        - assets/restaurant.json
+      - assets/data/
+      - assets/image/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
