@@ -44,7 +44,11 @@ class HomePage extends StatelessWidget {
       ),
       title: Text(
         restaurant.name,
-        style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+        style: const TextStyle(
+          fontSize: 16.0,
+          fontWeight: FontWeight.bold,
+          color: Colors.blue,
+        ),
       ),
       subtitle: Column(
         children: <Widget>[
