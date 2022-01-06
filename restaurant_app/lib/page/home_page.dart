@@ -19,14 +19,18 @@ class HomePage extends StatelessWidget {
       body: FutureBuilder<String>(
         future: DefaultAssetBundle.of(context).loadString('assets/data/restaurant.json'),
         builder: (context, snapshot) {
-          var json = jsonDecode(snapshot.data!);
-          var restaurant = Welcome.fromJson(json);
-          return ListView.builder(
-            itemCount: restaurant.restaurants.length,
-            itemBuilder: (context, index) {
-              return _buildRestaurantItem(context, restaurant.restaurants[index]);
-            },
-          );
+          if (snapshot.data != null) {
+            var json = jsonDecode(snapshot.data!);
+            var restaurant = Welcome.fromJson(json);
+            return ListView.builder(
+              itemCount: restaurant.restaurants.length,
+              itemBuilder: (context, index) {
+                return _buildRestaurantItem(context, restaurant.restaurants[index]);
+              },
+            );
+          } {
+            return CircularProgressIndicator();
+          }
         },
       ),
     );
