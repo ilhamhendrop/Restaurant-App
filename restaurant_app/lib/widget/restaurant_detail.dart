@@ -74,7 +74,7 @@ class DetailRestaurantWidget extends StatelessWidget {
                         color: Colors.grey,
                       ),
                       Text(
-                        resto.address,
+                        resto.address + ',' + resto.city,
                         style: const TextStyle(
                           color: Colors.grey,
                         ),
@@ -93,7 +93,11 @@ class DetailRestaurantWidget extends StatelessWidget {
                       Text(resto.rating.toString()),
                     ],
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 8,),
+                  Row(
+                    children: resto.categories.map((category) => Text(category.name)).toList(),
+                  ),
+                  const SizedBox(height: 10),
                   Text(
                     resto.description,
                     style: const TextStyle(fontSize: 14),
@@ -135,7 +139,7 @@ class DetailRestaurantWidget extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: 8,
+                    height: 10,
                   ),
                   const Text(
                     'Drinks',
@@ -166,11 +170,48 @@ class DetailRestaurantWidget extends StatelessWidget {
                             ],
                           )
                         ],
-                      ))
-                          .toList(),
+                      )).toList(),
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 10.0,),
+                  const Text(
+                    'Review',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue,
+                    ),
+                  ),
+                  const SizedBox(height: 8,),
+                  SingleChildScrollView(
+                    padding: const EdgeInsets.all(8),
+                    scrollDirection: Axis.horizontal,
+                    child: Column(
+                      children: [
+                        Row(
+                          children: resto.customerReviews.map((review) => Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Text(review.name),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(review.review),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(review.date),
+                                ],
+                              ),
+                            ],
+                          )).toList(),
+                        )
+                      ],
+                    )
+                  ),
                 ],
               ),
             ),
