@@ -12,6 +12,7 @@ class DetailRestaurantWidget extends StatelessWidget {
         if(state.restaurantState == RestaurantState.Loading){
           return const Center(child: CircularProgressIndicator(),);
         } else if(state.restaurantState == RestaurantState.HasData){
+          var resto = state.detailResto.restaurants;
           return Material(
             child: NestedScrollView(
                 headerSliverBuilder: (context, isScrolled) {
@@ -21,9 +22,9 @@ class DetailRestaurantWidget extends StatelessWidget {
                       expandedHeight: 200,
                       flexibleSpace: FlexibleSpaceBar(
                         background: Hero(
-                          tag: Image.network('https://restaurant-api.dicoding.dev/images/large/${state.detailResto.restaurants.pictureId}'),
+                          tag: Image.network('https://restaurant-api.dicoding.dev/images/large/${resto.pictureId}'),
                           child: Image.network(
-                            'https://restaurant-api.dicoding.dev/images/large/${state.detailResto.restaurants.pictureId}',
+                            'https://restaurant-api.dicoding.dev/images/large/${resto.pictureId}',
                             fit: BoxFit.fitHeight,
                           ),
                         ),
@@ -39,7 +40,7 @@ class DetailRestaurantWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            state.detailResto.restaurants.name,
+                            resto.name,
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -54,7 +55,7 @@ class DetailRestaurantWidget extends StatelessWidget {
                                 color: Colors.grey,
                               ),
                               Text(
-                                state.detailResto.restaurants.address,
+                                resto.address,
                                 style: const TextStyle(
                                   color: Colors.grey,
                                 ),
@@ -63,7 +64,7 @@ class DetailRestaurantWidget extends StatelessWidget {
                           ),
                           const SizedBox(height: 8.0,),
                           Text(
-                            state.detailResto.restaurants.description,
+                            resto.description,
                             style: const TextStyle(fontSize: 14),
                           ),
                           const Divider(color: Colors.grey,),
