@@ -10,6 +10,8 @@ import 'package:restaurant_app/widget/restaurant_list_widget.dart';
 class HomePage extends StatefulWidget {
   static const routeName = '/home_page';
 
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -32,7 +34,7 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
             onPressed: () {
               Navigator.pushNamed(context, SearchPage.routeName);
             },
@@ -41,7 +43,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: ChangeNotifierProvider(
         create: (_) => GetRestaurantProvider(getApiService: GetApiService()),
-        child: RestaurantList(),
+        child: const RestaurantList(),
       )
     );
   }

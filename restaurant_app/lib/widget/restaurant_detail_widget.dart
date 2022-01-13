@@ -3,12 +3,14 @@ import 'package:provider/provider.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
 
 class DetailRestaurantWidget extends StatelessWidget {
+  const DetailRestaurantWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Consumer<DetailRestaurantProvider>(
       builder: (context, state, _) {
         if(state.restaurantState == RestaurantState.Loading){
-          return Center(child: CircularProgressIndicator(),);
+          return const Center(child: CircularProgressIndicator(),);
         } else if(state.restaurantState == RestaurantState.HasData){
           return Material(
             child: NestedScrollView(
@@ -52,7 +54,7 @@ class DetailRestaurantWidget extends StatelessWidget {
                                 color: Colors.grey,
                               ),
                               Text(
-                                state.detailResto.restaurants.city,
+                                state.detailResto.restaurants.address,
                                 style: const TextStyle(
                                   color: Colors.grey,
                                 ),
@@ -62,7 +64,7 @@ class DetailRestaurantWidget extends StatelessWidget {
                           const SizedBox(height: 8.0,),
                           Text(
                             state.detailResto.restaurants.description,
-                            style: TextStyle(fontSize: 14),
+                            style: const TextStyle(fontSize: 14),
                           ),
                           const Divider(color: Colors.grey,),
 
@@ -78,7 +80,7 @@ class DetailRestaurantWidget extends StatelessWidget {
         } else if(state.restaurantState == RestaurantState.Error){
           return Center(child: Text(state.message));
         } else {
-          return Center(child: Text(''));
+          return const Center(child: Text(''));
         }
       },
     );

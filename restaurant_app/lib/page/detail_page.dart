@@ -32,7 +32,7 @@ class _DetailPageState extends State<DetailPage> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<DetailRestaurantProvider>(
       create: (_) => DetailRestaurantProvider(detailApiService: DetailApiService(), id: widget.restaurant.id),
-      child: DetailRestaurantWidget(),
+      child: const DetailRestaurantWidget(),
     );
   }
 }
