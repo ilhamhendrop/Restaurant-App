@@ -1,12 +1,27 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:restaurant_app/model/restaurant.dart';
-import 'package:restaurant_app/model/welcome.dart';
-import 'package:restaurant_app/page/detail_page.dart';
+import 'package:restaurant_app/page/search_page.dart';
+import 'package:restaurant_app/provider/restaurant_provider.dart';
+import 'package:restaurant_app/service/api_service.dart';
 
-class HomePage extends StatelessWidget {
+import 'package:restaurant_app/widget/restaurant_list_widget.dart';
+
+class HomePage extends StatefulWidget {
   static const routeName = '/home_page';
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late Future<Welcome> _restaurant;
+
+  @override
+  void initState() {
+    super.initState();
+    _restaurant = GetApiService().getRestaurant();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,72 +30,21 @@ class HomePage extends StatelessWidget {
         title: const Text(
           'Restaurant App',
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              Navigator.pushNamed(context, SearchPage.routeName);
+            },
+          )
+        ],
       ),
-      body: FutureBuilder<String>(
-        future: DefaultAssetBundle.of(context).loadString('assets/data/restaurant.json'),
-        builder: (context, snapshot) {
-          if (snapshot.data != null) {
-            var json = jsonDecode(snapshot.data!);
-            var restaurant = Welcome.fromJson(json);
-            return ListView.builder(
-              itemCount: restaurant.restaurants.length,
-              itemBuilder: (context, index) {
-                return _buildRestaurantItem(context, restaurant.restaurants[index]);
-              },
-            );
-          } {
-            return CircularProgressIndicator();
-          }
-        },
-      ),
+      body: ChangeNotifierProvider(
+        create: (_) => GetRestaurantProvider(getApiService: GetApiService()),
+        child: RestaurantList(),
+      )
     );
   }
 
-  Widget _buildRestaurantItem(BuildContext context, Restaurant restaurant) {
-    return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      leading: Hero(
-          tag: restaurant.pictureId,
-          child: Image.network(
-            restaurant.pictureId,
-            width: 100,
-          ),
-      ),
-      title: Text(
-        restaurant.name,
-        style: const TextStyle(
-          fontSize: 16.0,
-          fontWeight: FontWeight.bold,
-          color: Colors.blue,
-        ),
-      ),
-      subtitle: Column(
-        children: <Widget>[
-          const SizedBox(height: 4.0,),
-          Row(
-            children: <Widget>[
-              const Icon(
-                Icons.location_on,
-                color: Colors.grey,
-              ),
-              Text(restaurant.city),
-            ],
-          ),
-          const SizedBox(height: 4.0,),
-          Row(
-            children: <Widget>[
-              const Icon(
-                Icons.star_rate,
-                color: Colors.grey,
-              ),
-              Text(restaurant.rating.toString()),
-            ],
-          ),
-        ],
-      ),
-      onTap: () {
-        Navigator.pushNamed(context, DetailPage.routeName, arguments: restaurant);
-      },
-    );
-  }
+
 }
