@@ -1,12 +1,12 @@
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/model/search_restaurant.dart';
+import 'package:restaurant_app/page/detail_page.dart';
 import 'package:restaurant_app/page/home_page.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
 import 'package:restaurant_app/service/api_service.dart';
-import 'package:restaurant_app/styles/styles.dart';
 
-import 'detail_page.dart';
 
 class SearchPage extends StatefulWidget {
   static const routeName = '/search';
@@ -17,43 +17,36 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   String queries = '';
-
   final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: Column(
-          children: [
-            Row(
-              children: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (context) => const HomePage()),
-                            (route) => false);
-                  },
-                  icon: const Icon(Icons.arrow_left),
-                ),
-                const Text(
-                  'Cari Restaurant',
-                ),
-              ],
-            ),
-            SizedBox(height: 8,),
-            ChangeNotifierProvider(
-              create: (_) => SearchProvider(searchApiService: SearchApiService()),
-              child: Consumer<SearchProvider>(
-                builder: (context, state, _) {
-                  return Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 10),
-                    decoration: BoxDecoration(
-                      color: primaryColor,
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: ListTile(
+        child: Scaffold(
+          body:Column(
+            children: [
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => const HomePage()),
+                              (route) => false);
+                    },
+                    icon: const Icon(Icons.arrow_left),
+                  ),
+                  const Text(
+                    'Cari Restaurant',
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8,),
+              ChangeNotifierProvider(
+                create: (_) => SearchRestaurantProvider(searchApiService: SearchApiService()),
+                child: Consumer<SearchRestaurantProvider>(
+                  builder: (context, state, _) {
+                    return ListTile(
                       leading: const Icon(
                         Icons.search,
                         size: 30,
@@ -90,27 +83,26 @@ class _SearchPageState extends State<SearchPage> {
                           size: 30,
                         ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
-            ),
-            SizedBox(height: 30,),
-            Expanded(
+              const SizedBox(height: 30,),
+              Expanded(
                 child:Padding(
                   padding: const EdgeInsets.only(left: 10, right: 10),
                   child: _search(),
                 ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
-      ),
     );
   }
   Widget _search(){
-    return ChangeNotifierProvider<SearchProvider>(
-      create: (_) => SearchProvider(searchApiService: SearchApiService()),
-      child: Consumer<SearchProvider>(
+    return ChangeNotifierProvider<SearchRestaurantProvider>(
+      create: (_) => SearchRestaurantProvider(searchApiService: SearchApiService()),
+      child: Consumer<SearchRestaurantProvider>(
         builder: (context, state, _) {
           if(state.restaurantState == RestaurantState.Loading){
             return Padding(
@@ -127,13 +119,17 @@ class _SearchPageState extends State<SearchPage> {
             );
           } else if(state.restaurantState == RestaurantState.HasData){
             state.feacthSearchRestaurant(queries);
-            return ListView.builder(
-              shrinkWrap: true,
-              itemCount: state.search.restaurants.length,
-              itemBuilder: (context, index){
-                var restaurant = state.search.restaurants[index];
-                return _searchResto(context, restaurant);
-              },
+            return Container(
+              margin: const EdgeInsets.only(left: 16, right: 16),
+              height: MediaQuery.of(context).size.height,
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: state.search.restaurants.length,
+                itemBuilder: (context, index){
+                  var restaurant = state.search.restaurants[index];
+                  return _searchResto(context, restaurant);
+                },
+              ),
             );
           } else if(state.restaurantState == RestaurantState.NoData){
             state.feacthSearchRestaurant(queries);

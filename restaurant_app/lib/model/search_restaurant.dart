@@ -1,5 +1,5 @@
-class Search {
-  Search({
+class SearchResto {
+  SearchResto({
     required this.error,
     required this.founded,
     required this.restaurants,
@@ -9,7 +9,7 @@ class Search {
   final int founded;
   final List<SearchRestaurant> restaurants;
 
-  factory Search.fromJson(Map<String, dynamic> json) => Search(
+  factory SearchResto.fromJson(Map<String, dynamic> json) => SearchResto(
     error: json["error"],
     founded: json["founded"],
     restaurants: List<SearchRestaurant>.from(json["restaurants"].map((x) => SearchRestaurant.fromJson(x))),

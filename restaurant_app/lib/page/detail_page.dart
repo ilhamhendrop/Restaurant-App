@@ -20,14 +20,6 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
-  late Future<Detail> _detail;
-
-  @override
-  void initState() {
-    super.initState();
-    _detail = DetailApiService().getDetailRestaurant(widget.restaurant.id);
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(

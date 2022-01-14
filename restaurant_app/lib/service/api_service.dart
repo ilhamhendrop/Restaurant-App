@@ -5,11 +5,11 @@ import 'package:restaurant_app/model/detail_restaurant.dart';
 import 'package:restaurant_app/model/restaurant.dart';
 import 'package:restaurant_app/model/search_restaurant.dart';
 
-const String _baseUrl = 'https://restaurant-api.dicoding.dev/';
+const String _baseUrl = 'https://restaurant-api.dicoding.dev';
 
 class GetApiService {
   Future<Welcome> getRestaurant() async {
-    final respone = await http.get(Uri.parse(_baseUrl + "list"));
+    final respone = await http.get(Uri.parse(_baseUrl + "/list"));
     if(respone.statusCode == 200) {
       return Welcome.fromJson(json.decode(respone.body));
     } else {
@@ -20,7 +20,7 @@ class GetApiService {
 
 class DetailApiService {
   Future<Detail> getDetailRestaurant(String id) async {
-    final respone = await http.get(Uri.parse(_baseUrl + "detail/" + id));
+    final respone = await http.get(Uri.parse(_baseUrl + "/detail/" + id));
     if(respone.statusCode == 200) {
       return Detail.fromJson(json.decode(respone.body));
     } else {
@@ -30,10 +30,10 @@ class DetailApiService {
 }
 
 class SearchApiService{
-  Future<Search> searchRestaurant(String query) async {
-    final respone = await http.get(Uri.parse(_baseUrl + "search?q=" + query));
+  Future<SearchResto> searchRestaurant(String query) async {
+    final respone = await http.get(Uri.parse(_baseUrl + "/search?q=$query"));
     if(respone.statusCode == 200){
-      return Search.fromJson(json.decode(respone.body));
+      return SearchResto.fromJson(json.decode(respone.body));
     } else {
       throw Exception('Failed to Search');
     }

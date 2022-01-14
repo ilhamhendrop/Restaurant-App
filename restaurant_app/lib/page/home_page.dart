@@ -17,14 +17,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future<Welcome> _restaurant;
-
-  @override
-  void initState() {
-    super.initState();
-    _restaurant = GetApiService().getRestaurant();
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(

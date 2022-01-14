@@ -86,21 +86,20 @@ class DetailRestaurantProvider extends ChangeNotifier {
   }
 }
 
-class SearchProvider extends ChangeNotifier {
+class SearchRestaurantProvider extends ChangeNotifier {
   final SearchApiService searchApiService;
 
-
-  SearchProvider({required this.searchApiService}){
+  SearchRestaurantProvider({required this.searchApiService}){
     feacthSearchRestaurant(query);
   }
 
-  late Search _search;
+  late SearchResto _search;
   late RestaurantState _restaurantState;
   String _message = '';
   String _query = '';
 
   String get message => _message;
-  Search get search => _search;
+  SearchResto get search => _search;
   String get query => _query;
   RestaurantState get restaurantState => _restaurantState;
 
