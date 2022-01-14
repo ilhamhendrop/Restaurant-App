@@ -91,15 +91,15 @@ class _SearchPageState extends State<SearchPage> {
               Expanded(
                 child:Padding(
                   padding: const EdgeInsets.only(left: 10, right: 10),
-                  child: _search(),
+                  child: _cari(),
                 ),
-              )
+              ),
             ],
           ),
         ),
     );
   }
-  Widget _search(){
+  Widget _cari(){
     return ChangeNotifierProvider<SearchRestaurantProvider>(
       create: (_) => SearchRestaurantProvider(searchApiService: SearchApiService()),
       child: Consumer<SearchRestaurantProvider>(
@@ -114,6 +114,10 @@ class _SearchPageState extends State<SearchPage> {
                     minHeight: 5,
                     color: Colors.blue,
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text('Loading....'),
                 ],
               ),
             );
@@ -124,10 +128,10 @@ class _SearchPageState extends State<SearchPage> {
               height: MediaQuery.of(context).size.height,
               child: ListView.builder(
                 shrinkWrap: true,
-                itemCount: state.search.restaurants.length,
+                itemCount: state.searchResto?.restaurants.length,
                 itemBuilder: (context, index){
-                  var restaurant = state.search.restaurants[index];
-                  return _searchResto(context, restaurant);
+                  var restaurant = state.searchResto?.restaurants[index];
+                  return _searchRest(context, restaurant!);
                 },
               ),
             );
@@ -144,7 +148,7 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  Widget _searchResto(BuildContext context, SearchRestaurant restaurant) {
+  Widget _searchRest(BuildContext context, SearchRestaurant restaurant) {
     return Material(
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
