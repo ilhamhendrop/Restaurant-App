@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/model/detail_restaurant.dart';
 import 'package:restaurant_app/model/restaurant.dart';
+import 'package:restaurant_app/model/search_restaurant.dart';
 import 'package:restaurant_app/service/api_service.dart';
 
 enum RestaurantState {Loading, NoData, HasData, Error}
@@ -82,5 +83,47 @@ class DetailRestaurantProvider extends ChangeNotifier {
       return _message = 'Error ---> $e';
     }
 
+  }
+}
+
+class SearchProvider extends ChangeNotifier {
+  final SearchApiService searchApiService;
+
+
+  SearchProvider({required this.searchApiService}){
+    feacthSearchRestaurant(query);
+  }
+
+  late Search _search;
+  late RestaurantState _restaurantState;
+  String _message = '';
+  String _query = '';
+
+  String get message => _message;
+  Search get search => _search;
+  String get query => _query;
+  RestaurantState get restaurantState => _restaurantState;
+
+  Future<dynamic> feacthSearchRestaurant(String query) async {
+    try {
+      _restaurantState = RestaurantState.Loading;
+      _query = query;
+      notifyListeners();
+      final searchRes = await searchApiService.searchRestaurant(query);
+      if(searchRes.restaurants.isEmpty){
+        _restaurantState = RestaurantState.NoData;
+        notifyListeners();
+        return _message = 'Empty Data';
+      } else {
+        _restaurantState = RestaurantState.HasData;
+        notifyListeners();
+        return _search = searchRes;
+      }
+
+    } catch(e) {
+      _restaurantState = RestaurantState.Error;
+      notifyListeners();
+      return _message = 'Error ---> $e';
+    }
   }
 }

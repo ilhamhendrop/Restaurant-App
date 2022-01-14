@@ -27,24 +27,26 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Restaurant App',
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {
-              Navigator.pushNamed(context, SearchPage.routeName);
-            },
-          )
-        ],
+    return SafeArea(
+      child: Scaffold(
+          appBar: AppBar(
+            title: const Text(
+              'Restaurant App',
+            ),
+            actions: <Widget>[
+              IconButton(
+                icon: const Icon(Icons.search),
+                onPressed: () {
+                  Navigator.pushNamed(context, SearchPage.routeName);
+                },
+              )
+            ],
+          ),
+          body: ChangeNotifierProvider(
+            create: (_) => GetRestaurantProvider(getApiService: GetApiService()),
+            child: const RestaurantList(),
+          ),
       ),
-      body: ChangeNotifierProvider(
-        create: (_) => GetRestaurantProvider(getApiService: GetApiService()),
-        child: const RestaurantList(),
-      )
     );
   }
 

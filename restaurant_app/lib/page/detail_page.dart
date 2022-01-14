@@ -30,9 +30,11 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<DetailRestaurantProvider>(
-      create: (_) => DetailRestaurantProvider(detailApiService: DetailApiService(), id: widget.restaurant.id),
-      child: const DetailRestaurantWidget(),
+    return SafeArea(
+      child: ChangeNotifierProvider<DetailRestaurantProvider>(
+        create: (_) => DetailRestaurantProvider(detailApiService: DetailApiService(), id: widget.restaurant.id),
+        child: const DetailRestaurantWidget(),
+      ),
     );
   }
 }
