@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:restaurant_app/model/detail_restaurant.dart';
 
 class DetailWidget extends StatelessWidget {
-  DetailRestaurant resto;
-  DetailWidget({Key? key, required this.resto}) : super(key: key);
+  final DetailRestaurant resto;
+  
+  const DetailWidget({Key? key, required this.resto}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -3,9 +3,9 @@ import 'package:restaurant_app/model/restaurant.dart';
 import 'package:restaurant_app/page/detail_page.dart';
 
 class ListWidget extends StatelessWidget {
-  Restaurant restaurant;
+  final Restaurant restaurant;
 
-  ListWidget({Key? key, required this.restaurant}) : super(key: key);
+  const ListWidget({Key? key, required this.restaurant}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
