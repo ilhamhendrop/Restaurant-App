@@ -1,12 +1,9 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:restaurant_app/model/detail_restaurant.dart';
-import 'package:restaurant_app/model/restaurant.dart';
-import 'package:restaurant_app/model/search_restaurant.dart';
+import 'package:restaurant_app/model/respone_model.dart';
 
 const String _baseUrl = 'https://restaurant-api.dicoding.dev/';
-
 class GetApiService {
   Future<Welcome> getRestaurant() async {
     final respone = await http.get(Uri.parse(_baseUrl + "list"));

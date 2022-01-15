@@ -1,21 +1,3 @@
-class Detail {
-  Detail({
-    required this.error,
-    required this.message,
-    required this.restaurants,
-  });
-
-  final bool error;
-  final String message;
-  final DetailRestaurant restaurants;
-
-  factory Detail.fromJson(Map<String, dynamic> json) => Detail(
-    error: json["error"],
-    message: json["message"],
-    restaurants: DetailRestaurant.fromJson(json["restaurant"]),
-  );
-}
-
 class DetailRestaurant {
   DetailRestaurant({
     required this.id,

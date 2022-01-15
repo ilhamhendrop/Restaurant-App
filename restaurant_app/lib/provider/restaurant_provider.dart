@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/model/detail_restaurant.dart';
-import 'package:restaurant_app/model/restaurant.dart';
-import 'package:restaurant_app/model/search_restaurant.dart';
+import 'package:restaurant_app/model/respone_model.dart';
 import 'package:restaurant_app/service/api_service.dart';
 
 enum RestaurantState {Loading, NoData, HasData, Error}
@@ -18,9 +16,7 @@ class GetRestaurantProvider extends ChangeNotifier {
   late String _message = '';
 
   String get message => _message;
-
   Welcome get welcome => _welcome;
-
   RestaurantState get restaurantState => _restaurantState;
 
   Future<dynamic> _fetchAllRestaurant() async {
@@ -45,7 +41,6 @@ class GetRestaurantProvider extends ChangeNotifier {
   }
 
 }
-
 class DetailRestaurantProvider extends ChangeNotifier {
   final DetailApiService detailApiService;
   final String id;
@@ -85,7 +80,6 @@ class DetailRestaurantProvider extends ChangeNotifier {
 
   }
 }
-
 class SearchRestaurantProvider extends ChangeNotifier {
   final SearchApiService searchApiService;
 
