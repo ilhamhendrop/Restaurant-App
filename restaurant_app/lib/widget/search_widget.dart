@@ -18,49 +18,58 @@ class _SearchWidgetState extends State<SearchWidget> {
   Widget build(BuildContext context) {
     return Consumer<SearchRestaurantProvider>(
       builder: (context, state, _) {
-        return Container(
-          margin: const EdgeInsets.symmetric(horizontal: 10),
-          decoration: BoxDecoration(
-            color: primaryColor,
-            borderRadius: BorderRadius.circular(30),
-          ),
-          child: ListTile(
-            leading: const Icon(
-              Icons.search,
-              size: 30,
-            ),
-            title: TextField(
-              controller: _controller,
-              onChanged: (String query) {
-                if (query.isNotEmpty) {
-                  setState(() {
-                    queries = query;
-                  });
-                  state.feacthSearchRestaurant(query);
-                }
-              },
-              cursorColor: Colors.black,
-              decoration: const InputDecoration(
-                hintText: 'Cari Resto',
-                border: InputBorder.none,
+        return Center(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 20,
               ),
-            ),
-            trailing: IconButton(
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              onPressed: () {
-                if (queries.isNotEmpty) {
-                  _controller.clear();
-                  setState(() {
-                    queries = '';
-                  });
-                }
-              },
-              icon: const Icon(
-                Icons.close,
-                size: 30,
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 10),
+                decoration: BoxDecoration(
+                  color: primaryColor,
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: ListTile(
+                  leading: const Icon(
+                    Icons.search,
+                    size: 30,
+                  ),
+                  title: TextField(
+                    controller: _controller,
+                    onChanged: (String query) {
+                      if (query.isNotEmpty) {
+                        setState(() {
+                          queries = query;
+                        });
+                        state.feacthSearchRestaurant(query);
+                      }
+                    },
+                    cursorColor: Colors.black,
+                    decoration: const InputDecoration(
+                      hintText: 'Cari Resto',
+                      border: InputBorder.none,
+                    ),
+                  ),
+                  trailing: IconButton(
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onPressed: () {
+                      if (queries.isNotEmpty) {
+                        _controller.clear();
+                        setState(() {
+                          queries = '';
+                        });
+                      }
+                    },
+                    icon: const Icon(
+                      Icons.close,
+                      size: 30,
+                    ),
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
         );
       },

@@ -13,23 +13,31 @@ class RestaurantSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<SearchRestaurantProvider>(
       builder: (context, state, _) {
-        if(state.restaurantState == RestaurantState.Loading){
-          return const CircularProgressIndicator(color: Colors.blue,);
-        } else if(state.restaurantState == RestaurantState.HasData){
+        if (state.restaurantState == RestaurantState.Loading) {
+          return const CircularProgressIndicator(
+            color: Colors.blue,
+          );
+        } else if (state.restaurantState == RestaurantState.HasData) {
           return ListView.builder(
             shrinkWrap: true,
             itemCount: state.searchResto!.restaurants.length,
-            itemBuilder: (context, index){
+            itemBuilder: (context, index) {
               var restaurant = state.searchResto!.restaurants[index];
               return _searchRest(context, restaurant);
             },
           );
-        } else if(state.restaurantState == RestaurantState.NoData){
-          return Center(child: Text(state.message),);
-        } else if(state.restaurantState == RestaurantState.Error){
-          return Center(child: Text(state.message),);
+        } else if (state.restaurantState == RestaurantState.NoData) {
+          return Center(
+            child: Text(state.message),
+          );
+        } else if (state.restaurantState == RestaurantState.Error) {
+          return Center(
+            child: Text(state.message),
+          );
         } else {
-          return const Center(child: Text(''),);
+          return const Center(
+            child: Text(''),
+          );
         }
       },
     );
@@ -38,9 +46,11 @@ class RestaurantSearch extends StatelessWidget {
   Widget _searchRest(BuildContext context, SearchRestaurant restaurant) {
     return Material(
       child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
         leading: Hero(
-          tag: Image.network('https://restaurant-api.dicoding.dev/images/medium/${restaurant.pictureId}'),
+          tag: Image.network(
+              'https://restaurant-api.dicoding.dev/images/medium/${restaurant.pictureId}'),
           child: Image.network(
             'https://restaurant-api.dicoding.dev/images/medium/${restaurant.pictureId}',
             width: 100,
@@ -56,7 +66,9 @@ class RestaurantSearch extends StatelessWidget {
         ),
         subtitle: Column(
           children: <Widget>[
-            const SizedBox(height: 4.0,),
+            const SizedBox(
+              height: 4.0,
+            ),
             Row(
               children: <Widget>[
                 const Icon(
@@ -66,7 +78,9 @@ class RestaurantSearch extends StatelessWidget {
                 Text(restaurant.city),
               ],
             ),
-            const SizedBox(height: 4.0,),
+            const SizedBox(
+              height: 4.0,
+            ),
             Row(
               children: <Widget>[
                 const Icon(
@@ -79,7 +93,8 @@ class RestaurantSearch extends StatelessWidget {
           ],
         ),
         onTap: () {
-          Navigator.pushNamed(context, DetailPage.routeName, arguments: restaurant);
+          Navigator.pushNamed(context, DetailPage.routeName,
+              arguments: restaurant);
         },
       ),
     );
