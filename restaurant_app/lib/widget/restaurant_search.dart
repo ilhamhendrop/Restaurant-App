@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant_app/model/search_restaurant.dart';
+import 'package:restaurant_app/model/restaurant.dart';
 import 'package:restaurant_app/page/detail_page.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
 
@@ -43,7 +43,7 @@ class RestaurantSearch extends StatelessWidget {
     );
   }
 
-  Widget _searchRest(BuildContext context, SearchRestaurant restaurant) {
+  Widget _searchRest(BuildContext context, Restaurant restaurant) {
     return Material(
       child: ListTile(
         contentPadding:
