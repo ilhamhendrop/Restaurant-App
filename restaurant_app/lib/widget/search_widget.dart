@@ -4,6 +4,8 @@ import 'package:restaurant_app/provider/restaurant_provider.dart';
 import 'package:restaurant_app/styles/styles.dart';
 
 class SearchWidget extends StatefulWidget {
+  const SearchWidget({Key? key}) : super(key: key);
+
   @override
   State<SearchWidget> createState() => _SearchWidgetState();
 }

@@ -27,11 +27,11 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: HomePage.routeName,
       routes: {
-        HomePage.routeName: (context) => HomePage(),
+        HomePage.routeName: (context) => const HomePage(),
         DetailPage.routeName: (context) => DetailPage(
           restaurant: ModalRoute.of(context)?.settings.arguments as Restaurant,
         ),
-        SearchPage.routeName: (context) => SearchPage(),
+        SearchPage.routeName: (context) => const SearchPage(),
       },
     );
   }

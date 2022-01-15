@@ -5,7 +5,9 @@ import 'package:restaurant_app/page/detail_page.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
 
 class RestaurantSearch extends StatelessWidget {
-  String queries = '';
+  final String queries = '';
+
+  const RestaurantSearch({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
