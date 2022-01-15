@@ -108,7 +108,7 @@ class SearchRestaurantProvider extends ChangeNotifier {
 
       if(query.isNotEmpty){
         _restaurantState = RestaurantState.Loading;
-        notifyListeners();
+        _query = query;
         final searchRes = await searchApiService.searchRestaurant(query);
         if(searchRes.restaurants.isEmpty){
           _restaurantState = RestaurantState.NoData;

@@ -12,7 +12,7 @@ class DetailRestaurantWidget extends StatelessWidget {
       builder: (context, state, _) {
         if (state.restaurantState == RestaurantState.Loading) {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(color: Colors.blue,),
           );
         } else if (state.restaurantState == RestaurantState.HasData) {
           var resto = state.detailResto.restaurants;

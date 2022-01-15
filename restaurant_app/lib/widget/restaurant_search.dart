@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:restaurant_app/model/search_restaurant.dart';
 import 'package:restaurant_app/page/detail_page.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
-import 'package:restaurant_app/service/api_service.dart';
 
 class RestaurantSearch extends StatelessWidget {
   String queries = '';
@@ -17,10 +16,10 @@ class RestaurantSearch extends StatelessWidget {
         } else if(state.restaurantState == RestaurantState.HasData){
           return ListView.builder(
             shrinkWrap: true,
-            itemCount: state.searchResto?.restaurants.length,
+            itemCount: state.searchResto!.restaurants.length,
             itemBuilder: (context, index){
-              var restaurant = state.searchResto?.restaurants[index];
-              return _searchRest(context, restaurant!);
+              var restaurant = state.searchResto!.restaurants[index];
+              return _searchRest(context, restaurant);
             },
           );
         } else if(state.restaurantState == RestaurantState.NoData){

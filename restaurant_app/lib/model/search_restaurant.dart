@@ -14,6 +14,7 @@ class SearchResto {
     founded: json["founded"],
     restaurants: List<SearchRestaurant>.from(json["restaurants"].map((x) => SearchRestaurant.fromJson(x))),
   );
+
 }
 
 class SearchRestaurant {
@@ -41,4 +42,5 @@ class SearchRestaurant {
     city: json["city"],
     rating: json["rating"].toDouble(),
   );
+
 }
