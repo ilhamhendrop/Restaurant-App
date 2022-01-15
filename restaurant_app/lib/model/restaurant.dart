@@ -24,13 +24,3 @@ class Restaurant {
     rating: json["rating"].toDouble(),
   );
 }
-
-
-
-
-
-
-
-
-
-
