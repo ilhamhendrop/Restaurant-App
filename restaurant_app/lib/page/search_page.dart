@@ -26,7 +26,7 @@ class SearchPage extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: const [
                     SearchWidget(),
-                    SizedBox(height: 10),
+                    SizedBox(height: 20),
                     Padding(
                       padding: EdgeInsets.only(left: 10, right: 10),
                       child: RestaurantSearch(),
