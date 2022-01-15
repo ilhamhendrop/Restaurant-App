@@ -35,9 +35,6 @@ class _SearchPageState extends State<SearchPage> {
                   },
                   icon: const Icon(Icons.arrow_back),
                 ),
-                const Text(
-                  'Cari Restaurant',
-                ),
               ],
             ),
             const SizedBox(height: 8,),
