@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:restaurant_app/model/restaurant.dart';
 import 'package:restaurant_app/page/detail_page.dart';
 
-class ListRestaurant extends StatelessWidget {
+class ListWidget extends StatelessWidget {
   Restaurant restaurant;
 
-  ListRestaurant({Key? key, required this.restaurant}) : super(key: key);
+  ListWidget({Key? key, required this.restaurant}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

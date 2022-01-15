@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
-import 'package:restaurant_app/widget/list_restaurant.dart';
+import 'package:restaurant_app/widget/list_widget.dart';
 
 class RestaurantList extends StatelessWidget {
   const RestaurantList({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ class RestaurantList extends StatelessWidget {
             itemCount: state.welcome.restaurants.length,
             itemBuilder: (context, index) {
               var restaurant = state.welcome.restaurants[index];
-              return ListRestaurant(restaurant: restaurant,);
+              return ListWidget(restaurant: restaurant,);
             },
           );
         } else if(state.restaurantState == RestaurantState.NoData){
