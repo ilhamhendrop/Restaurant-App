@@ -31,8 +31,7 @@ class DetailApiService {
 
 class SearchApiService{
   Future<SearchResto> searchRestaurant(String query) async {
-    final response = await http.get(Uri.parse(_baseUrl + 'search?q=$query'));
-
+    final response = await http.get(Uri.parse(_baseUrl + "search?q=" + query));
     if (response.statusCode == 200) {
       return SearchResto.fromJson(json.decode(response.body));
     } else {

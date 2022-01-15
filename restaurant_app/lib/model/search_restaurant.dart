@@ -26,12 +26,12 @@ class SearchRestaurant {
     required this.rating,
   });
 
-  final String id;
-  final String name;
-  final String description;
-  final String pictureId;
-  final String city;
-  final double rating;
+  String id;
+  String name;
+  String description;
+  String pictureId;
+  String city;
+  double rating;
 
   factory SearchRestaurant.fromJson(Map<String, dynamic> json) => SearchRestaurant(
     id: json["id"],

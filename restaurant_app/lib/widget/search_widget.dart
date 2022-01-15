@@ -1,14 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
+import 'package:restaurant_app/styles/styles.dart';
 
 class SearchWidget extends StatefulWidget {
   @override
-  State<SearchWidget> createState() => _SeacrhWidgetState();
+  State<SearchWidget> createState() => _SearchWidgetState();
 }
 
-class _SeacrhWidgetState extends State<SearchWidget> {
+class _SearchWidgetState extends State<SearchWidget> {
   String queries = '';
   final TextEditingController _controller = TextEditingController();
 
@@ -16,41 +16,48 @@ class _SeacrhWidgetState extends State<SearchWidget> {
   Widget build(BuildContext context) {
     return Consumer<SearchRestaurantProvider>(
       builder: (context, state, _) {
-        return ListTile(
-          leading: const Icon(
-            Icons.search,
-            size: 30,
+        return Container(
+          margin: const EdgeInsets.symmetric(horizontal: 10),
+          decoration: BoxDecoration(
+            color: primaryColor,
+            borderRadius: BorderRadius.circular(30),
           ),
-          title: TextField(
-            controller: _controller,
-            onChanged: (String query) {
-              if(query.isNotEmpty){
-                setState(() {
-                  queries = query;
-                });
-                state.feacthSearchRestaurant(query);
-              }
-            },
-            cursorColor: Colors.black,
-            decoration: const InputDecoration(
-              hintText: 'Cari Resto',
-              border: InputBorder.none,
-            ),
-          ),
-          trailing: IconButton(
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onPressed: () {
-              if (queries.isNotEmpty) {
-                _controller.clear();
-                setState(() {
-                  queries = '';
-                });
-              }
-            },
-            icon: const Icon(
-              Icons.close,
+          child: ListTile(
+            leading: const Icon(
+              Icons.search,
               size: 30,
+            ),
+            title: TextField(
+              controller: _controller,
+              onChanged: (String query) {
+                if (query.isNotEmpty) {
+                  setState(() {
+                    queries = query;
+                  });
+                  state.feacthSearchRestaurant(query);
+                }
+              },
+              cursorColor: Colors.black,
+              decoration: const InputDecoration(
+                hintText: 'Cari Resto',
+                border: InputBorder.none,
+              ),
+            ),
+            trailing: IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onPressed: () {
+                if (queries.isNotEmpty) {
+                  _controller.clear();
+                  setState(() {
+                    queries = '';
+                  });
+                }
+              },
+              icon: const Icon(
+                Icons.close,
+                size: 30,
+              ),
             ),
           ),
         );

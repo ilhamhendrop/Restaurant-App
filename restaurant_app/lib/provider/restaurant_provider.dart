@@ -93,17 +93,17 @@ class SearchRestaurantProvider extends ChangeNotifier {
     feacthSearchRestaurant(query);
   }
 
-  late SearchResto _searchResto;
+  SearchResto? _searchResto;
   RestaurantState? _restaurantState;
   String _message = '';
   String _query = '';
 
   String get message => _message;
-  SearchResto get searchResto => _searchResto;
+  SearchResto? get searchResto => _searchResto;
   String get query => _query;
   RestaurantState? get restaurantState => _restaurantState;
 
-  Future<dynamic> feacthSearchRestaurant(String query) async {
+  Future<dynamic> feacthSearchRestaurant(query) async {
     try {
 
       if(query.isNotEmpty){
@@ -111,7 +111,6 @@ class SearchRestaurantProvider extends ChangeNotifier {
         _query = query;
         notifyListeners();
         final searchRes = await searchApiService.searchRestaurant(query);
-
         if(searchRes.restaurants.isEmpty){
           _restaurantState = RestaurantState.NoData;
           notifyListeners();

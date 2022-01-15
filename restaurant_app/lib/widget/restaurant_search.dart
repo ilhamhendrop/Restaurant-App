@@ -15,34 +15,17 @@ class RestaurantSearch extends StatelessWidget {
       child: Consumer<SearchRestaurantProvider>(
         builder: (context, state, _) {
           if(state.restaurantState == RestaurantState.Loading){
-            return Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  LinearProgressIndicator(
-                    minHeight: 5,
-                    color: Colors.blue,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text('Loading....'),
-                ],
-              ),
-            );
+            return const CircularProgressIndicator(color: Colors.blue,);
           } else if(state.restaurantState == RestaurantState.HasData){
-            state.feacthSearchRestaurant(queries);
             return ListView.builder(
               shrinkWrap: true,
-              itemCount: state.searchResto.restaurants.length,
+              itemCount: state.searchResto?.restaurants.length,
               itemBuilder: (context, index){
-                var restaurant = state.searchResto.restaurants[index];
-                return _searchRest(context, restaurant);
+                var restaurant = state.searchResto?.restaurants[index];
+                return _searchRest(context, restaurant!);
               },
             );
           } else if(state.restaurantState == RestaurantState.NoData){
-            state.feacthSearchRestaurant(queries);
             return Center(child: Text(state.message),);
           } else if(state.restaurantState == RestaurantState.Error){
             return Center(child: Text(state.message),);

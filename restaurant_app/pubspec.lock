@@ -44,7 +44,7 @@ packages:
     source: hosted
     version: "1.15.0"
   connectivity:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: connectivity
       url: "https://pub.dartlang.org"
