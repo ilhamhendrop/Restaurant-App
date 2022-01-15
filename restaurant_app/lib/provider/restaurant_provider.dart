@@ -103,12 +103,11 @@ class SearchRestaurantProvider extends ChangeNotifier {
   String get query => _query;
   RestaurantState? get restaurantState => _restaurantState;
 
-  Future<dynamic> feacthSearchRestaurant(query) async {
+  Future<dynamic> feacthSearchRestaurant(String query) async {
     try {
 
       if(query.isNotEmpty){
         _restaurantState = RestaurantState.Loading;
-        _query = query;
         notifyListeners();
         final searchRes = await searchApiService.searchRestaurant(query);
         if(searchRes.restaurants.isEmpty){

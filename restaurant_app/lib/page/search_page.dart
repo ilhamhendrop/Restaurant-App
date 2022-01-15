@@ -51,7 +51,10 @@ class _SearchPageState extends State<SearchPage> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(left: 10, right: 10),
-                child: RestaurantSearch(),
+                child: ChangeNotifierProvider<SearchRestaurantProvider>(
+                  create: (_) => SearchRestaurantProvider(searchApiService: SearchApiService()),
+                  child: RestaurantSearch(),
+                ),
               ),
             ),
           ],
