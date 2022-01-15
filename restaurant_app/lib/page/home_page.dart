@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant_app/model/restaurant.dart';
 import 'package:restaurant_app/page/search_page.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
 import 'package:restaurant_app/service/api_service.dart';
@@ -21,26 +20,24 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          appBar: AppBar(
-            title: const Text(
-              'Restaurant App',
+        appBar: AppBar(
+          title: const Text(
+            'Restaurant App',
+          ),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () {
+                Navigator.pushNamed(context, SearchPage.routeName);
+              },
             ),
-            actions: <Widget>[
-              IconButton(
-                icon: const Icon(Icons.search),
-                onPressed: () {
-                  Navigator.pushNamed(context, SearchPage.routeName);
-                },
-              )
-            ],
-          ),
-          body: ChangeNotifierProvider(
-            create: (_) => GetRestaurantProvider(getApiService: GetApiService()),
-            child: const RestaurantList(),
-          ),
+          ],
+        ),
+        body: ChangeNotifierProvider(
+          create: (_) => GetRestaurantProvider(getApiService: GetApiService()),
+          child: const RestaurantList(),
+        ),
       ),
     );
   }
-
-
 }
