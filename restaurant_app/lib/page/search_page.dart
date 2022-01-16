@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant_app/provider/restaurant_provider.dart';
+import 'package:restaurant_app/provider/search_provider.dart';
 import 'package:restaurant_app/service/api_service.dart';
 import 'package:restaurant_app/widget/restaurant_search.dart';
 import 'package:restaurant_app/widget/search_widget.dart';
@@ -21,7 +21,7 @@ class SearchPage extends StatelessWidget {
             Expanded(
               child: ChangeNotifierProvider(
                 create: (_) => SearchRestaurantProvider(
-                    searchApiService: SearchApiService()),
+                    searchApiService: ApiService()),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: const [

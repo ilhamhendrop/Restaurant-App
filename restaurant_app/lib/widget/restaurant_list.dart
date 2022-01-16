@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant_app/provider/restaurant_provider.dart';
+import 'package:restaurant_app/provider/list_provider.dart';
 import 'package:restaurant_app/widget/list_widget.dart';
 
 class RestaurantList extends StatelessWidget {

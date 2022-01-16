@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant_app/provider/restaurant_provider.dart';
+import 'package:restaurant_app/provider/detail_provider.dart';
 import 'package:restaurant_app/widget/detail_widget.dart';
 
 class DetailRestaurantWidget extends StatelessWidget {
