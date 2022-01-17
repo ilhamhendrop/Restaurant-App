@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_offline/flutter_offline.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/provider/search_provider.dart';
 import 'package:restaurant_app/service/api_service.dart';
@@ -15,30 +16,67 @@ class SearchPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Expanded(
-              child: ChangeNotifierProvider(
-                create: (_) => SearchRestaurantProvider(
-                    searchApiService: ApiService()),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: const [
-                    SearchWidget(),
-                    SizedBox(height: 20),
-                    Padding(
-                      padding: EdgeInsets.only(left: 10, right: 10),
-                      child: RestaurantSearch(),
-                    ),
-                  ],
+          child: Padding(
+        padding: MediaQuery.of(context).padding,
+        child: OfflineBuilder(
+          connectivityBuilder: (
+            BuildContext context,
+            ConnectivityResult connectivity,
+            Widget child,
+          ) {
+            final bool connected = connectivity != ConnectivityResult.none;
+            return Stack(
+              fit: StackFit.expand,
+              children: [
+                Positioned(
+                  height: 28.0,
+                  left: 0.0,
+                  right: 0.0,
+                  child: connected
+                      ? Visibility(
+                          visible: true,
+                          child: Container(),
+                        )
+                      : Container(
+                          color: Colors.red,
+                          child: const Center(
+                            child: Text(
+                              "Loss Connection",
+                            ),
+                          ),
+                        ),
                 ),
-              ),
-            )
-          ],
+                Center(
+                  child: Padding(
+                    padding: MediaQuery.of(context).padding,
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: ChangeNotifierProvider(
+                            create: (_) => SearchRestaurantProvider(
+                                searchApiService: ApiService()),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: const [
+                                SearchWidget(),
+                                SizedBox(height: 20),
+                                Flexible(
+                                  child: RestaurantSearch(),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  ),
+                ),
+              ],
+            );
+          },
+          child: Container(),
         ),
-      ),
+      )),
     );
   }
 }
-

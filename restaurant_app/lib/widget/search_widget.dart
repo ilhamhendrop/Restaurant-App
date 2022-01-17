@@ -21,9 +21,6 @@ class _SearchWidgetState extends State<SearchWidget> {
         return Center(
           child: Column(
             children: [
-              const SizedBox(
-                height: 20,
-              ),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
