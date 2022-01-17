@@ -10,16 +10,16 @@ class DetailRestaurantWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<DetailRestaurantProvider>(
       builder: (context, state, _) {
-        if (state.restaurantState == RestaurantState.Loading) {
+        if (state.restaurantState == RestaurantState.loading) {
           return const Center(
             child: CircularProgressIndicator(color: Colors.blue,),
           );
-        } else if (state.restaurantState == RestaurantState.HasData) {
+        } else if (state.restaurantState == RestaurantState.hasData) {
           var resto = state.detailResto.restaurants;
           return DetailWidget(resto: resto);
-        } else if (state.restaurantState == RestaurantState.NoData) {
+        } else if (state.restaurantState == RestaurantState.noData) {
           return Center(child: Text(state.message));
-        } else if (state.restaurantState == RestaurantState.Error) {
+        } else if (state.restaurantState == RestaurantState.error) {
           return Center(child: Text(state.message));
         } else {
           return const Center(child: Text(''));

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:restaurant_app/service/api_service.dart';
 import 'package:restaurant_app/model/respone_model.dart';
 
-enum RestaurantState {Loading, NoData, HasData, Error}
+enum RestaurantState {loading, noData, hasData, error}
 
 class SearchRestaurantProvider extends ChangeNotifier {
   final ApiService searchApiService;
@@ -25,22 +25,22 @@ class SearchRestaurantProvider extends ChangeNotifier {
     try {
 
       if(query.isNotEmpty){
-        _restaurantState = RestaurantState.Loading;
+        _restaurantState = RestaurantState.loading;
         _query = query;
         final searchRes = await searchApiService.searchRestaurant(query);
         if(searchRes.restaurants.isEmpty){
-          _restaurantState = RestaurantState.NoData;
+          _restaurantState = RestaurantState.noData;
           notifyListeners();
           return _message = 'Empty Data';
         } else {
-          _restaurantState = RestaurantState.HasData;
+          _restaurantState = RestaurantState.hasData;
           notifyListeners();
           return _searchResto = searchRes;
         }
       }
 
     } catch(e) {
-      _restaurantState = RestaurantState.Error;
+      _restaurantState = RestaurantState.error;
       notifyListeners();
       return _message = 'Error ---> $e';
     }

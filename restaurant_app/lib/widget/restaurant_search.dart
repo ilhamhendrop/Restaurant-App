@@ -13,11 +13,11 @@ class RestaurantSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<SearchRestaurantProvider>(
       builder: (context, state, _) {
-        if (state.restaurantState == RestaurantState.Loading) {
+        if (state.restaurantState == RestaurantState.loading) {
           return const CircularProgressIndicator(
             color: Colors.blue,
           );
-        } else if (state.restaurantState == RestaurantState.HasData) {
+        } else if (state.restaurantState == RestaurantState.hasData) {
           return ListView.builder(
             shrinkWrap: true,
             itemCount: state.searchResto!.restaurants.length,
@@ -26,11 +26,11 @@ class RestaurantSearch extends StatelessWidget {
               return ListWidget(restaurant: restaurant);
             },
           );
-        } else if (state.restaurantState == RestaurantState.NoData) {
+        } else if (state.restaurantState == RestaurantState.noData) {
           return Center(
             child: Text(state.message),
           );
-        } else if (state.restaurantState == RestaurantState.Error) {
+        } else if (state.restaurantState == RestaurantState.error) {
           return Center(
             child: Text(state.message),
           );
