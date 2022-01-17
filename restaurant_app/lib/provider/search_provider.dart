@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/service/api_service.dart';
 import 'package:restaurant_app/model/respone_model.dart';
@@ -23,7 +25,6 @@ class SearchRestaurantProvider extends ChangeNotifier {
 
   Future<dynamic> feacthSearchRestaurant(String query) async {
     try {
-
       if(query.isNotEmpty){
         _restaurantState = RestaurantState.loading;
         _query = query;
@@ -38,11 +39,14 @@ class SearchRestaurantProvider extends ChangeNotifier {
           return _searchResto = searchRes;
         }
       }
-
-    } catch(e) {
+    } on SocketException catch (e){
       _restaurantState = RestaurantState.error;
       notifyListeners();
-      return _message = 'Error ---> $e';
+      return _message = 'Not connected to the internet...';
+    } catch (e) {
+      _restaurantState = RestaurantState.error;
+      notifyListeners();
+      return _message = 'Sorry, something is wrong...';
     }
   }
 }

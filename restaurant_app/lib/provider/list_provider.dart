@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/service/api_service.dart';
 import 'package:restaurant_app/model/respone_model.dart';
@@ -33,11 +35,16 @@ class GetRestaurantProvider extends ChangeNotifier {
         notifyListeners();
         return _welcome = restaurant;
       }
+    } on SocketException catch (e){
+      _restaurantState = RestaurantState.error;
+      notifyListeners();
+      return _message = 'Not connected to the internet...';
     } catch (e) {
       _restaurantState = RestaurantState.error;
       notifyListeners();
-      return _message = 'Error ----> $e';
+      return _message = 'Sorry, something is wrong...';
     }
+
   }
 
 }
