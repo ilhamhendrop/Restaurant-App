@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';
-import 'package:provider/provider.dart';
-import 'package:restaurant_app/provider/search_provider.dart';
-import 'package:restaurant_app/service/api_service.dart';
 import 'package:restaurant_app/widget/restaurant_search.dart';
 import 'package:restaurant_app/widget/search_widget.dart';
 
