@@ -15,7 +15,7 @@ class DetailRestaurantWidget extends StatelessWidget {
             child: CircularProgressIndicator(color: Colors.blue,),
           );
         } else if (state.restaurantState == RestaurantState.hasData) {
-          var resto = state.detailResto.restaurants;
+          var resto = state.detailResto.restaurant;
           return DetailWidget(resto: resto);
         } else if (state.restaurantState == RestaurantState.noData) {
           return Center(child: Text(state.message));

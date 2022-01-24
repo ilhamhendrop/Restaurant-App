@@ -21,24 +21,37 @@ class Welcome {
         restaurants: List<Restaurant>.from(json["restaurants"].map((x) => Restaurant.fromJson(x))),
     );
 
+    Map<String, dynamic> toJson() => {
+      "error": error,
+      "message": message,
+      "count": count,
+      "restaurants": List<dynamic>.from(restaurants.map((x) => x.toJson())),
+    };
+
 }
 
 class Detail {
   Detail({
     required this.error,
     required this.message,
-    required this.restaurants,
+    required this.restaurant,
   });
 
   final bool error;
   final String message;
-  final DetailRestaurant restaurants;
+  final DetailRestaurant restaurant;
 
   factory Detail.fromJson(Map<String, dynamic> json) => Detail(
     error: json["error"],
     message: json["message"],
-    restaurants: DetailRestaurant.fromJson(json["restaurant"]),
+    restaurant: DetailRestaurant.fromJson(json["restaurant"]),
   );
+
+  Map<String, dynamic> toJson() => {
+    "error": error,
+    "message": message,
+    "restaurant": restaurant.toJson(),
+  };
 }
 
 class SearchResto {

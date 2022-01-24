@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurant_app/page/favorit_page.dart';
 import 'package:restaurant_app/page/search_page.dart';
+import 'package:restaurant_app/page/setting_page.dart';
 import 'package:restaurant_app/provider/list_provider.dart';
 import 'package:restaurant_app/service/api_service.dart';
 
@@ -24,6 +26,18 @@ class HomePage extends StatelessWidget {
             icon: const Icon(Icons.search),
             onPressed: () {
               Navigator.pushNamed(context, SearchPage.routeName);
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.favorite_border),
+            onPressed: (){
+              Navigator.pushNamed(context, FavoritPage.routeName);
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () {
+              Navigator.pushNamed(context, SettingPage.routeName);
             },
           ),
         ],
@@ -57,14 +71,10 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                 ),
-                Center(
+                const Center(
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ChangeNotifierProvider(
-                      create: (_) =>
-                          GetRestaurantProvider(getApiService: ApiService()),
-                      child: const RestaurantList(),
-                    ),
+                    padding: EdgeInsets.all(8.0),
+                    child: RestaurantList(),
                   ),
                 ),
               ],

@@ -52,10 +52,7 @@ class SearchPage extends StatelessWidget {
                         child: Column(
                           children: [
                             Expanded(
-                              child: ChangeNotifierProvider(
-                                create: (_) => SearchRestaurantProvider(
-                                    searchApiService: ApiService()),
-                                child: Column(
+                              child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: const [
                                     SearchWidget(),
@@ -66,7 +63,6 @@ class SearchPage extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                            ),
                           ],
                         )),
                   ),
