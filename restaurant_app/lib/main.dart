@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurant_app/common/navigation.dart';
 import 'package:restaurant_app/page/detail_page.dart';
 import 'package:restaurant_app/page/favorit_page.dart';
 import 'package:restaurant_app/page/search_page.dart';
 import 'package:restaurant_app/page/setting_page.dart';
 import 'package:restaurant_app/provider/database_provider.dart';
+import 'package:restaurant_app/provider/scheduling_provider.dart';
 import 'package:restaurant_app/service/api_service.dart';
 import 'package:restaurant_app/styles/styles.dart';
 import 'package:restaurant_app/page/home_page.dart';
@@ -12,8 +16,27 @@ import 'package:restaurant_app/model/restaurant.dart';
 import 'package:restaurant_app/db/database_helper.dart';
 import 'package:restaurant_app/provider/list_provider.dart';
 import 'package:restaurant_app/provider/search_provider.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:restaurant_app/utils/notificartion_helper.dart';
+import 'package:restaurant_app/utils/background_service.dart';
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 
-void main() {
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final NotificationHelper _notificationHelper = NotificationHelper();
+  final BackgroundService _service = BackgroundService();
+
+  _service.initIsolate();
+
+  if(Platform.isAndroid){
+    await AndroidAlarmManager.initialize();
+  }
+
+  await _notificationHelper.initNotifications(flutterLocalNotificationsPlugin);
+
+
   runApp(const MyApp());
 }
 
@@ -34,6 +57,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<DatabaseProvider>(
           create: (_) => DatabaseProvider(databaseHelper: DatabaseHelper()),
         ),
+        ChangeNotifierProvider<SchedulingProvider>(
+          create: (_) => SchedulingProvider(),
+        )
       ],
       child: MaterialApp(
       title: 'Restaurant App',
@@ -44,6 +70,7 @@ class MyApp extends StatelessWidget {
           secondary: secondaryColor,
         ),
       ),
+      navigatorKey: navigatorKey,
       initialRoute: HomePage.routeName,
       routes: {
         HomePage.routeName: (context) => const HomePage(),
@@ -52,7 +79,7 @@ class MyApp extends StatelessWidget {
         ),
         SearchPage.routeName: (context) => const SearchPage(),
         FavoritPage.routeName : (context) => const FavoritPage(),
-        SettingPage.routeName : (context) => SettingPage(),
+        SettingPage.routeName : (context) => const SettingPage(),
       },
     ),
     );
