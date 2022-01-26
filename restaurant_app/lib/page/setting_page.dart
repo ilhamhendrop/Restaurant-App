@@ -1,20 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant_app/page/detail_page.dart';
 import 'package:restaurant_app/provider/scheduling_provider.dart';
-import 'package:restaurant_app/utils/notificartion_helper.dart';
 
-class SettingPage extends StatefulWidget {
+class SettingPage extends StatelessWidget {
   static const routeName = '/setting';
 
   const SettingPage({Key? key}) : super(key: key);
-
-  @override
-  State<SettingPage> createState() => _SettingPageState();
-}
-
-class _SettingPageState extends State<SettingPage> {
-  final NotificationHelper _notificationHelper = NotificationHelper();
 
   @override
   Widget build(BuildContext context) {
@@ -38,19 +29,5 @@ class _SettingPageState extends State<SettingPage> {
         ),
       ),
     );
-  }
-
-  @override
-  void initState() {
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
-      _notificationHelper.configurareSelectNotificationSubjec(DetailPage.routeName);
-    });
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    selectNotificationSubject.close();
-    super.dispose();
   }
 }

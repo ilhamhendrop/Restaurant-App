@@ -58,14 +58,14 @@ class NotificationHelper {
       titleNotification,
       titleRestaurant,
       platformChannelSpesifics,
-      payload: json.encode({"number": randomNumber, "data": restaurants.toJson()}),
+      payload: json.encode(restaurants.toJson()),
     );
   }
 
   void configurareSelectNotificationSubjec(String route) {
     selectNotificationSubject.stream.listen((String payload) async {
-      var data = Welcome.fromJson(json.decode(payload)["data"]);
-      var restaurant = data.restaurants[json.decode(payload)["number"]].id;
+      var data = Welcome.fromJson(json.decode(payload));
+      var restaurant = data.restaurants[randomNumber];
       Navigation.intentWithData(route, restaurant);
     });
   }

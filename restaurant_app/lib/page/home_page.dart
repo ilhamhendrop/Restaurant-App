@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';
+import 'package:restaurant_app/page/detail_page.dart';
 import 'package:restaurant_app/page/favorit_page.dart';
 import 'package:restaurant_app/page/search_page.dart';
 import 'package:restaurant_app/page/setting_page.dart';
+import 'package:restaurant_app/utils/notificartion_helper.dart';
 
 import 'package:restaurant_app/widget/restaurant_list.dart';
 
@@ -16,7 +18,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
+  final NotificationHelper _notificationHelper = NotificationHelper();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,5 +91,18 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-  
+
+  @override
+  void initState() {
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      _notificationHelper.configurareSelectNotificationSubjec(DetailPage.routeName);
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    selectNotificationSubject.close();
+    super.dispose();
+  }
 }
