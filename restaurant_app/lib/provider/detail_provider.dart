@@ -11,7 +11,7 @@ class DetailRestaurantProvider extends ChangeNotifier {
   final String id;
 
   DetailRestaurantProvider({required this.detailApiService, required this.id}){
-    _fecthDetailRestaurant(id);
+    fecthDetailRestaurant(id);
   }
 
   late Detail _detailResto;
@@ -22,7 +22,7 @@ class DetailRestaurantProvider extends ChangeNotifier {
   Detail get detailResto => _detailResto;
   RestaurantState get restaurantState => _restaurantState;
 
-  Future<dynamic> _fecthDetailRestaurant(String id) async {
+  Future<dynamic>fecthDetailRestaurant(String id) async {
     try {
       _restaurantState = RestaurantState.loading;
       notifyListeners();

@@ -42,8 +42,10 @@ class _SettingPageState extends State<SettingPage> {
 
   @override
   void initState() {
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      _notificationHelper.configurareSelectNotificationSubjec(DetailPage.routeName);
+    });
     super.initState();
-    _notificationHelper.configurareSelectNotificationSubjec(DetailPage.routeName);
   }
 
   @override

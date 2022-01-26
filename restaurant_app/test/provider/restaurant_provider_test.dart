@@ -3,9 +3,9 @@ import 'package:mockito/annotations.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
 import 'package:restaurant_app/model/respone_model.dart';
-import 'package:restaurant_app/service/testing_service.dart';
+import 'package:restaurant_app/service/test_api_service.dart';
 
-import 'restaurant_provider_testing.mocks.dart';
+import 'restaurant_provider_test.mocks.dart';
 
 
 @GenerateMocks([http.Client])
