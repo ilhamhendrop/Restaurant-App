@@ -20,13 +20,13 @@ class DatabaseProvider extends ChangeNotifier {
   List<Restaurant> _favorit = [];
   List<Restaurant> get favorit => _favorit;
 
-  void getAllRestaurant() async {
+    void getAllRestaurant() async {
     _favorit = await databaseHelper.getAllRestaurant();
     if(_favorit.isNotEmpty){
+      _state = RestaurantState.hasData;
+    } else {
       _state = RestaurantState.noData;
       _message = 'Empty Data';
-    } else {
-      _state = RestaurantState.hasData;
     }
 
     notifyListeners();
