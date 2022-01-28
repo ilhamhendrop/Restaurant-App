@@ -25,9 +25,6 @@ class NotificationHelper {
 
     await flutterLocalNotificationsPlugin.initialize(initSettings,
         onSelectNotification: (String? payload) async {
-      if (payload != null) {
-        print('notification payload: ' + payload);
-      }
       selectNotificationSubject.add(payload ?? 'empty payload');
     });
   }
